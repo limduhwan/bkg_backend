@@ -1,0 +1,8 @@
+[
+  { no: 2, title: "자바의 정석", author: "20", publisher:"시나공", publishedDate:"2018-03-01", createdDate:"2018-03-01",applier:”b”,status:"보유" },
+  { no: 3, title: "자바의 정석", author: "20", publisher:"시나공", publishedDate:"2018-04-01", createdDate:"2018-04-01",applier:”c”,status:"보유" },
+  { no: 4, title: "자바의 정석", author: "20", publisher:"시나공", publishedDate:"2018-05-01", createdDate:"2018-05-01",applier:”d”,status:"보유" },
+  { no: 5, title: "자바의 정석", author: "20", publisher:"시나공", publishedDate:"2018-06-01", createdDate:"2018-06-01",applier:”e”,status:"보유" },
+  { no: 6, title: "자바의 정석", author: "20", publisher:"시나공", publishedDate:"2018-07-01", createdDate:"2018-07-01",applier:”f”,status:"보유" }
+]
+

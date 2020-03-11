@@ -1,0 +1,6 @@
+{
+  "dbConfig" : {
+    "uri": "mongodb+srv://c35p:simple@cluster0-2ysjo.mongodb.net/test?retryWrites=true&w=majority",
+    "dbName": "c35p"
+  }
+}
