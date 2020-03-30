@@ -5,8 +5,8 @@ const cors = require('cors');
 const Router = require('./routes/routes');
 require('./lib/database-manager').connect();
 
-app.use('/', Router);
 app.use(cors());
+app.use('/', Router);
 
 // app.get('/', (req, res) => res.send('Hello World!'))
 
