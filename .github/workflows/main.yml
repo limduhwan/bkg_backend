@@ -26,9 +26,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
-#      - name: Push to S3
-#        run: |
-#          aws deploy pu
+      - name: Push to S3
+        run: |
+          aws deploy push --application-name c35p-backend --s3-location s3://c35p-book/c35p-backend.zip --source .  --region ap-northeast-2
 #      - name: Deploy to EC2
 #        run: |
 #          aws deploy create-deployment --application-name honey-bee-development --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name honey-bee-dev-deploy-group --s3-location bucket=honey-bee.development,key=honeybee.zip,bundleType=zip  --region ap-northeast-2  --ignore-application-stop-failures --file-exists-behavior OVERWRITE
