@@ -20,6 +20,12 @@ async function readAllBooks(filterType) {
   return bookItems;
 }
 
+async function insertBook(book) {
+  console.log('insertBook', book);
+  return items().insertOne(JSON.parse(book));
+}
+
 module.exports = {
   readAllBooks,
+  insertBook,
 };

@@ -1,5 +1,6 @@
 const {
   readAllBooks,
+  insertBook,
 } = require('../persistance/books-repository');
 
 async function readAllBooksBy(filterType) {
@@ -8,6 +9,13 @@ async function readAllBooksBy(filterType) {
   return bookItems;
 }
 
+async function requestBook(book) {
+  // console.log('requestBook', book);
+  const bookItem = await insertBook(book);
+  return bookItem;
+}
+
 module.exports = {
   readAllBooksBy,
+  requestBook,
 };
