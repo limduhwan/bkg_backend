@@ -7,25 +7,30 @@ function items() {
 
 async function readAllBooks(filterType) {
   let bookItems;
-  if (filterType === 'ALL') {
-    console.log('filterType   ', filterType);
+  if (filterType === '전체') {
     bookItems = await items().find({}).toArray();
   } else {
-    console.log('filterType   ', filterType);
     bookItems = await items().find({status: filterType}).toArray();
   }
-
-  console.log('bookItems', bookItems);
 
   return bookItems;
 }
 
 async function insertBook(book) {
-  console.log('insertBook', book);
   return items().insertOne(JSON.parse(book));
+}
+
+async function updateBookByIsbn(isbn, bookInfo) {
+  const bookData = JSON.parse(bookInfo);
+
+  return await items().updateOne(
+      { isbn },
+      { $set: { updatedDate: bookData.updatedDate,  status: bookData.status} },
+  );
 }
 
 module.exports = {
   readAllBooks,
   insertBook,
+  updateBookByIsbn,
 };
