@@ -5,9 +5,11 @@ const { readAllBooksBy, requestBook, updateBook } = require('../services/book-se
 router.get('/', (req, res) => res.send('Hello World!'))
 
 router.get('/readAllBooksBy/:filterType', async (req, res) => {
-
+  console.log('1===============');
   const { filterType } = req.params;
+  console.log('2===============');
   const bookItems = await readAllBooksBy(filterType);
+  console.log('3===============');
 
   res.send({bookItems});
 });
