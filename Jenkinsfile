@@ -42,7 +42,7 @@ pipeline {
             DOCKER_IMAGE = "${PROJECT_NAME}:01"
           }
 
-          sh "docker build -t ${DOCKER_IMAGE} -f ./Dockerfile ."
+          sh "docker build -t ${DOCKER_IMAGE} ."
           sh "docker inspect ${DOCKER_IMAGE}"
 
         }
