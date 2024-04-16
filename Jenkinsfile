@@ -13,4 +13,5 @@ pipeline {
         git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
       }
     }
+  }
 }
