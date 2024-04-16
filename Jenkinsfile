@@ -1,8 +1,10 @@
 pipeline {
   environment {
     registry = "ismile2u/bkg_msa"
-    registryCredential = "docker_accesstoken"
-    dockerImage = ""
+    DOCKER_CREDENTIAL = 'docker_accesstoken'
+    DOCKER_IMAGE      = ''
+    DOCKER_USERNAME   = 'limduhwan@gmail.com'
+    DOCKER_PASSWORD   = 'yesseancan0!'
   }
 
   agent any
@@ -19,7 +21,6 @@ pipeline {
       steps {
         git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
       }
-    }
 
     stage('03. 소스코드 컴파일') {
       steps {
@@ -30,8 +31,11 @@ pipeline {
 
     stage('04. 소스코드를 이미지로 빌드') {
       steps {
+
+        sh "docker -v"
+
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+
         }
       }
     }
