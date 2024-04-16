@@ -55,7 +55,7 @@ pipeline {
       }
     }
 
-    stage('05. AWS 이미지 저장소(ECR)로 밀어 넣기')
+    stage('05. AWS 이미지 저장소(ECR)로 밀어 넣기'){
       steps {
         script{
           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:" + AWS_ECR_CREDENTIAL) {
