@@ -1,4 +1,10 @@
 pipeline {
+  environment {
+    registry = "ismile2u/bkg_msa"
+    registryCredential = "docker_accesstoken"
+    dockerImage = ""
+  }
+
   agent any
   tools {nodejs "nodejs"}
 
@@ -22,6 +28,13 @@ pipeline {
       }
     }
 
+    stage('04. 소스코드를 이미지로 빌드') {
+      steps {
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
 
 
 
