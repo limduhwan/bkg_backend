@@ -31,12 +31,7 @@ pipeline {
 
     stage('04. 소스코드를 이미지로 빌드') {
       steps {
-
         sh "docker -v"
-
-        script {
-
-        }
       }
     }
 
