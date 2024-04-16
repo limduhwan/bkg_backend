@@ -21,6 +21,7 @@ pipeline {
       steps {
         git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
       }
+    }
 
     stage('03. 소스코드 컴파일') {
       steps {
@@ -34,7 +35,6 @@ pipeline {
         sh "docker -v"
       }
     }
-
 
 
   }
