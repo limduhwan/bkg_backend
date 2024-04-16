@@ -39,10 +39,10 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
             DOCKER_USERNAME = "${DOCKER_USERNAME}"
             DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
-            DOCKER_IMAGE = "${DOCKER_USERNAME}/${PROJECT_NAME}:lates"
+            DOCKER_IMAGE = "${PROJECT_NAME}:01"
           }
 
-          sh "docker build -t ${DOCKER_IMAGE} ."
+          sh "docker build -t ${DOCKER_IMAGE} -f ./Dockerfile ."
           sh "docker inspect ${DOCKER_IMAGE}"
 
         }
