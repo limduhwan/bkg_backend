@@ -34,11 +34,13 @@ pipeline {
 
     stage('CI - 03. 정적테스트 - 코드 취약점 점검') {
       steps {
+        echo "CI - 03. 정적테스트 - 코드 취약점 점검"
       }
     }
 
     stage('CI - 04. 오픈소스 취약점 점검') {
       steps {
+        echo "CI - 04. 오픈소스 취약점 점검"
       }
     }
 
