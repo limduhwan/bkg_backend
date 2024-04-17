@@ -10,7 +10,7 @@ pipeline {
     DOCKER_PASSWORD   = 'yesseancan0!'
 
     // AWS 이미지 저장소 위치와 액세스키
-    AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend'
+    AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend/'
     AWS_ECR_CREDENTIAL = 'aws_accesstoken'
 
     IMAGE_NAME      = ''
@@ -63,9 +63,10 @@ pipeline {
 
           echo 'IMAGE_NAME ==============='
           echo "${IMAGE_NAME}"
+          echo "${AWS_ECR_REGISTRY}"
           echo 'IMAGE_NAME ==============='
 
-          sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
+          //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
           docker.image("${IMAGE_NAME}:latest").push()
           }
