@@ -4,7 +4,6 @@ pipeline {
     PROJECT_NAME      = 'bkg_backend'
     // Jenkins Crendential 매니저에 저장된 도커 허브 접속용 액세스키
     DOCKER_CREDENTIAL = 'docker_accesstoken'
-    DOCKER_IMAGE      = ''
 
     // 평문저장! 도커 허브 접속 정보
     DOCKER_USERNAME   = 'ismile2u'
@@ -13,6 +12,8 @@ pipeline {
     // AWS 이미지 저장소 위치와 액세스키
     AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend'
     AWS_ECR_CREDENTIAL = 'aws_accesstoken'
+
+    IMAGE_NAME      = ''
   }
 
   agent any
@@ -46,7 +47,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
             DOCKER_USERNAME = "${DOCKER_USERNAME}"
             DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
-            DOCKER_IMAGE = "${PROJECT_NAME}:01"
+            IMAGE_NAME = "${PROJECT_NAME}:01"
           }
 
           sh "docker build -t ${DOCKER_IMAGE} -f ./Dockerfile ."
