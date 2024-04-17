@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "ismile2u/bkg_msa"
-    PROJECT_NAME      = 'bkg_backend'
+    PROJECT_NAME      = 'bkg-backend'
     // Jenkins Crendential 매니저에 저장된 도커 허브 접속용 액세스키
     DOCKER_CREDENTIAL = 'docker_accesstoken'
 
