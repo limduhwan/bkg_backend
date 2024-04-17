@@ -20,26 +20,36 @@ pipeline {
   tools {nodejs "nodejs"}
 
   stages {
-    stage('01. Hello') {
+    stage('CI - 01. Hello') {
       steps {
         echo 'Hello Jenkins'
       }
     }
 
-    stage('02. Githup 소스 가져오기') {
+    stage('CI - 02. Githup 소스 가져오기') {
       steps {
         git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
       }
     }
 
-    stage('03. 소스코드 컴파일') {
+    stage('CI - 03. 정적테스트 - 코드 취약점 점검') {
+      steps {
+      }
+    }
+
+    stage('CI - 04. 오픈소스 취약점 점검') {
+      steps {
+      }
+    }
+
+    stage('CI - 05. 소스코드 컴파일') {
       steps {
         sh 'npm install'
         sh 'npm run build'
       }
     }
 
-    stage('04. 소스코드를 이미지로 빌드') {
+    stage('CI - 06. 소스코드를 이미지로 빌드') {
       steps {
         sh "docker -v"
 
@@ -56,7 +66,7 @@ pipeline {
       }
     }
 
-    stage('05. AWS 이미지 저장소(ECR)로 밀어 넣기'){
+    stage('CD - 01. AWS 이미지 저장소(ECR)로 밀어 넣기'){
       steps {
         script{
           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:" + AWS_ECR_CREDENTIAL) {
@@ -72,7 +82,7 @@ pipeline {
       }
     }
 
-    stage('06. AWS EKS에 이미지 배포하기'){
+    stage('CD - 02. AWS EKS에 이미지 배포하기'){
       steps {
         echo "AWS EKS에 이미지 배포하기! 아자! 아자!"
       }
