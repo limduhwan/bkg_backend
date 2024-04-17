@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "ismile2u/bkg_msa"
-    PROJECT_NAME      = 'bkg-backend'
+    PROJECT_NAME      = 'bkg_backend'
     // Jenkins Crendential 매니저에 저장된 도커 허브 접속용 액세스키
     DOCKER_CREDENTIAL = 'docker_accesstoken'
 
@@ -10,7 +10,7 @@ pipeline {
     DOCKER_PASSWORD   = 'yesseancan0!'
 
     // AWS 이미지 저장소 위치와 액세스키
-    AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com'
+    AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend'
     AWS_ECR_CREDENTIAL = 'aws_accesstoken'
 
     IMAGE_NAME      = ''
@@ -59,7 +59,7 @@ pipeline {
     stage('05. AWS 이미지 저장소(ECR)로 밀어 넣기'){
       steps {
         script{
-          docker.withRegistry("https://" + AWS_ECR_REGISTRY + "/bkg_backend", "ecr:ap-northeast-2:" + AWS_ECR_CREDENTIAL) {
+          docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:" + AWS_ECR_CREDENTIAL) {
 
           echo 'IMAGE_NAME ==============='
           echo "${IMAGE_NAME}"
