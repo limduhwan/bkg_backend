@@ -50,7 +50,7 @@ pipeline {
             IMAGE_NAME = "${PROJECT_NAME}"
           }
 
-          sh "docker build -t ${IMAGE_NAME} -f ./Dockerfile ."
+          sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
           sh "docker inspect ${IMAGE_NAME}"
         }
       }
@@ -65,8 +65,8 @@ pipeline {
           echo "${IMAGE_NAME}"
           echo 'IMAGE_NAME ==============='
 
-          //docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
-          docker.image("${IMAGE_NAME}").push()
+          docker tag $IMAGE_NAME:$BUILD_NUMBER $IMAGE_NAME:latest
+          docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
           docker.image("${IMAGE_NAME}:latest").push()
           }
         }
