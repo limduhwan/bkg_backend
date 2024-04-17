@@ -68,7 +68,7 @@ pipeline {
 
           //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
-          docker.image("${IMAGE_NAME}:latest").push()
+//           docker.image("${IMAGE_NAME}:latest").push()
           }
         }
       }
