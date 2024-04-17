@@ -50,8 +50,8 @@ pipeline {
             IMAGE_NAME = "${PROJECT_NAME}:01"
           }
 
-          sh "docker build -t ${DOCKER_IMAGE} -f ./Dockerfile ."
-          sh "docker inspect ${DOCKER_IMAGE}"
+          sh "docker build -t ${IMAGE_NAME} -f ./Dockerfile ."
+          sh "docker inspect ${IMAGE_NAME}"
         }
       }
     }
