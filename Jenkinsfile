@@ -66,14 +66,17 @@ pipeline {
           echo "${AWS_ECR_REGISTRY}"
           echo 'IMAGE_NAME ==============='
 
-          //sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
-//           docker.image("${IMAGE_NAME}:latest").push()
           }
         }
       }
     }
 
+    stage('06. AWS EKS에 이미지 배포하기'){
+      steps {
+        echo "AWS EKS에 이미지 배포하기! 아자! 아자!"
+      }
+    }
 
 
 
