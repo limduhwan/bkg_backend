@@ -65,7 +65,8 @@ pipeline {
           echo "${IMAGE_NAME}"
           echo 'IMAGE_NAME ==============='
 
-          docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
+          //docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
+          docker.image("${IMAGE_NAME}").push()
           docker.image("${IMAGE_NAME}:latest").push()
           }
         }
