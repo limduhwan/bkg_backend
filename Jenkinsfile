@@ -59,8 +59,8 @@ pipeline {
       steps {
         script{
           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:" + AWS_ECR_CREDENTIAL) {
-          app.push("${version}")   // tag 정보
-          app.push("latest")       // tag 정보
+          docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
+          docker.image("${IMAGE_NAME}:latest").push()
           }
         }
       }
