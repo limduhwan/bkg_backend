@@ -47,7 +47,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
             DOCKER_USERNAME = "${DOCKER_USERNAME}"
             DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
-            IMAGE_NAME = "${PROJECT_NAME}:${BUILD_NUMBER}"
+            IMAGE_NAME = "${PROJECT_NAME}"
           }
 
           sh "docker build -t ${IMAGE_NAME} -f ./Dockerfile ."
