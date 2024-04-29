@@ -1,34 +1,34 @@
-name: c35p-book-backend
+name: checkov
 on:
+  pull_request:
   push:
     branches:
-      - master
+      - main
 jobs:
-  build:
+  scan:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for GitHub/codeql-action/upload-sarif to upload SARIF results
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install
-        run: |
-          npm install
+      - uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Run checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
-      - name: Push to S3
-        run: |
-          aws deploy push --application-name c35p-backend --s3-location s3://c35p-book/c35p-backend.zip --source .  --region ap-northeast-2
-#      - name: Deploy to EC2
-#        run: |
-#          aws deploy create-deployment --application-name honey-bee-development --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name honey-bee-dev-deploy-group --s3-location bucket=honey-bee.development,key=honeybee.zip,bundleType=zip  --region ap-northeast-2  --ignore-application-stop-failures --file-exists-behavior OVERWRITE
+          #directory: /code
+          #soft_fail: true
+          api-key: ${{ secrets.BC_API_KEY }}
+        env:
+          PRISMA_API_URL: https://api.sg.prismacloud.io
+
+      - name: Upload SARIF file
+        uses: GitHub/codeql-action/upload-sarif@v3
+# Results are generated only on a success or failure
+# this is required since GitHub by default won't run the next step
+# when the previous one has failed. Alternatively, enable soft_fail in checkov action.
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
