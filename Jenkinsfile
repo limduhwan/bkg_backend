@@ -93,8 +93,13 @@ pipeline {
     stage('Scan') {
       steps {
         prismaCloudScanImage ca: '', cert: '', dockerAddress: 'unix:///var/run/docker.sock', image: 'image:lates', key: '', logLevel: 'info', podmanPath: '', project: '', resultsFile: 'prisma-cloud-scan-results.json'
-        ignoreImageBuildTime: false
+        ignoreImageBuildTime: true
       }
     }
   }
+//   post {
+//     always {
+//       prismaCloudPublish resultsFilePattern: 'prisma-cloud-scan-results.json'
+//       }
+//   }
 }
