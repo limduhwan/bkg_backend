@@ -63,7 +63,7 @@ pipeline {
           }
 
           sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
-          sh "docker inspect ${IMAGE_NAME}"
+          //sh "docker inspect ${IMAGE_NAME}"
         }
       }
     }
@@ -93,7 +93,7 @@ pipeline {
     stage('Scan') {
       steps {
         prismaCloudScanImage ca: '', cert: '', dockerAddress: 'unix:///var/run/docker.sock', image: 'bkg_backend:${BUILD_NUMBER}', key: '', logLevel: 'info', podmanPath: '', project: '', resultsFile: 'prisma-cloud-scan-results.json',
-        ignoreImageBuildTime: false
+        ignoreImageBuildTime: true
       }
     }
   }
