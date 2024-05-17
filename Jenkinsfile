@@ -80,8 +80,8 @@ pipeline {
 //
 //           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
 //           }
+//         }
           echo "ECR"
-        }
       }
     }
 
