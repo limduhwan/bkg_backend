@@ -11,7 +11,7 @@ pipeline {
 
     // AWS 이미지 저장소 위치와 액세스키
     AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend'
-    AWS_ECR_CREDENTIAL = 'aws_accesskey'
+    AWS_ECR_CREDENTIAL = aws_accesskey
 
     IMAGE_NAME      = ''
   }
@@ -53,18 +53,18 @@ pipeline {
 
     stage('CI - 06. 소스코드를 이미지로 빌드') {
       steps {
-        sh "docker -v"
-
-        script {
-          withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            DOCKER_USERNAME = "${DOCKER_USERNAME}"
-            DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
-            IMAGE_NAME = "${PROJECT_NAME}"
-          }
-
-          sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
-          //sh "docker inspect ${IMAGE_NAME}"
-        }
+//         sh "docker -v"
+//
+//         script {
+//           withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+//             DOCKER_USERNAME = "${DOCKER_USERNAME}"
+//             DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
+//             IMAGE_NAME = "${PROJECT_NAME}"
+//           }
+//
+//           sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
+//           //sh "docker inspect ${IMAGE_NAME}"
+//         }
        echo "Build"
       }
     }
@@ -72,7 +72,7 @@ pipeline {
     stage('CD - 01. AWS 이미지 저장소(ECR)로 밀어 넣기'){
       steps {
         script{
-          docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:" + "${AWS_ECR_CREDENTIAL}") {
+          docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:${AWS_ECR_CREDENTIAL}") {
 
           echo 'IMAGE_NAME ==============='
           echo "${IMAGE_NAME}"
@@ -105,4 +105,3 @@ pipeline {
 //       }
 //   }
 }
-
