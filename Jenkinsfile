@@ -86,7 +86,7 @@ pipeline {
 //           echo 'IMAGE_NAME ==============='
 //
 //           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
-          }
+//           }
         }
           echo "ECR"
       }
