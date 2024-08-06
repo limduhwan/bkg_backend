@@ -11,7 +11,7 @@ pipeline {
 
     // AWS 이미지 저장소 위치와 액세스키
     AWS_ECR_REGISTRY = '992382447222.dkr.ecr.ap-northeast-2.amazonaws.com/bkg_backend'
-    AWS_ECR_CREDENTIAL = aws_accesskey
+    AWS_ECR_CREDENTIAL = 'aws_accesskey'
 
     IMAGE_NAME      = ''
   }
