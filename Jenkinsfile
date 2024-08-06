@@ -74,7 +74,7 @@ pipeline {
         script{
             echo 'AWS_ECR_REGISTRY ==============='
             echo "${DOCKER_CREDENTIAL}"
-            echo "${AWS_ECR_REGISTRY}"
+            echo "${AWS_ECR_CREDENTIAL}"
 //           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:"+AWS_ECR_CREDENTIAL) {
 
 //           echo 'IMAGE_NAME ==============='
