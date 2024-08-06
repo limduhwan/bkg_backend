@@ -17,7 +17,7 @@ pipeline {
   }
 
   agent any
-  tools {nodejs "nodejs"}
+//   tools {nodejs "nodejs"}
 
   stages {
     stage('CI - 01. Hello') {
@@ -28,7 +28,8 @@ pipeline {
 
     stage('CI - 02. Githup 소스 가져오기') {
       steps {
-        git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
+        echo '2'
+//         git credentialsId: 'github_accesstoken', url: 'https://github.com/limduhwan/bkg_backend.git'
       }
     }
 
@@ -46,25 +47,26 @@ pipeline {
 
     stage('CI - 05. 소스코드 컴파일') {
       steps {
-        sh 'npm install'
-        sh 'npm run build'
+        echo '5'
+//         sh 'npm install'
+//         sh 'npm run build'
       }
     }
 
     stage('CI - 06. 소스코드를 이미지로 빌드') {
       steps {
-        sh "docker -v"
-
-        script {
-          withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            DOCKER_USERNAME = "${DOCKER_USERNAME}"
-            DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
-            IMAGE_NAME = "${PROJECT_NAME}"
-          }
-
-          sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
-          //sh "docker inspect ${IMAGE_NAME}"
-        }
+//         sh "docker -v"
+//
+//         script {
+//           withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIAL}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+//             DOCKER_USERNAME = "${DOCKER_USERNAME}"
+//             DOCKER_PASSWORD = "${DOCKER_PASSWORD}"
+//             IMAGE_NAME = "${PROJECT_NAME}"
+//           }
+//
+//           sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ./Dockerfile ."
+//           //sh "docker inspect ${IMAGE_NAME}"
+//         }
        echo "Build"
       }
     }
@@ -76,14 +78,14 @@ pipeline {
             echo "${DOCKER_CREDENTIAL}"
             echo "${AWS_ECR_CREDENTIAL}"
 
-          docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:"+AWS_ECR_CREDENTIAL) {
-
-          echo 'IMAGE_NAME ==============='
-          echo "${IMAGE_NAME}"
-          echo "${AWS_ECR_REGISTRY}"
-          echo 'IMAGE_NAME ==============='
-
-          docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
+//           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:"+AWS_ECR_CREDENTIAL) {
+//
+//           echo 'IMAGE_NAME ==============='
+//           echo "${IMAGE_NAME}"
+//           echo "${AWS_ECR_REGISTRY}"
+//           echo 'IMAGE_NAME ==============='
+//
+//           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
           }
         }
           echo "ECR"
