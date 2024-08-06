@@ -72,14 +72,14 @@ pipeline {
     stage('CD - 01. AWS 이미지 저장소(ECR)로 밀어 넣기'){
       steps {
         script{
-          docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:${AWS_ECR_CREDENTIAL}") {
+//           docker.withRegistry("https://" + AWS_ECR_REGISTRY, "ecr:ap-northeast-2:"+AWS_ECR_CREDENTIAL) {
 
           echo 'IMAGE_NAME ==============='
           echo "${IMAGE_NAME}"
           echo "${AWS_ECR_REGISTRY}"
           echo 'IMAGE_NAME ==============='
 
-          docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
+//           docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
           }
         }
           echo "ECR"
